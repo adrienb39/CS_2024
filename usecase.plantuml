@@ -47,8 +47,3 @@ UC_Gerer_Commande --> (Payer une amende) : <<extend>> : si en retard
 
 
 @enduml
-
-' Accès du commercial
-commercial --> UC_Gerer_Entreprise
-commercial --> UC_Gerer_Commande
-commercial --> UC_MDP

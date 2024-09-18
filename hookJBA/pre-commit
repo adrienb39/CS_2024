@@ -4,7 +4,7 @@
 MYSQLDUMP="C:/xampp/mysql/bin/mysqldump.exe"
  
 # Remplacez par les détails de votre base de données
-DB_NAME="cs_2023_cafe"
+DB_NAME="CS_2024"
 DB_USER="root"
 DUMP_FILE="C:/Users/jba/PhpstormProjects/2023-CSCafe/sql/$DB_NAME.sql"
 
