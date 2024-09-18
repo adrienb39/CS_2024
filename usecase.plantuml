@@ -15,8 +15,40 @@ actor :administrateur du logiciel: as admin
 actor :utilisateur Cafe: as userCafe
 actor :entreprise cliente: as entreprise
 actor :salarié entreprise cliente: as salarie
+actor :rédacteur: as redacteur
+actor :commercial: as commercial
 
 
+admin --> UC_Gerer_Compte
+admin --> UC_MDP
+
+userCafe --> UC_Gerer_Commande
+userCafe --> UC_MDP
+
+entreprise --> UC_Gerer_Entreprise
+entreprise --> UC_Gerer_Commande
+entreprise --> UC_MDP
+
+salarie --> UC_Gerer_Commande
+salarie --> UC_MDP
+
+redacteur --> UC_Gerer_Catalogue
+redacteur --> UC_G_Produit
+redacteur --> UC_G_Cat_Produit
+redacteur --> UC_MDP
+
+commercial --> UC_Gerer_Entreprise
+commercial --> UC_Gerer_Commande
+commercial --> UC_MDP
+
+' Relations d'inclusion et d'extension
+UC_Gerer_Commande --> (Vérifier disponibilité) : <<include>>
+UC_Gerer_Commande --> (Payer une amende) : <<extend>> : si en retard
 
 
 @enduml
+
+' Accès du commercial
+commercial --> UC_Gerer_Entreprise
+commercial --> UC_Gerer_Commande
+commercial --> UC_MDP
