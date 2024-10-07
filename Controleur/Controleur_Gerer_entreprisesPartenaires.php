@@ -18,7 +18,7 @@ use function App\Fonctions\GenereMDP;
  * Le tri entre les actions est fait sur l'existence des boutons submit. Deux boutons ne doivent pas avoir le même nom ! ;)
  */
 $Vue->setEntete(new Vue_Structure_Entete());
-$Vue->setMenu(new Vue_Menu_Administration());
+$Vue->setMenu(new Vue_Menu_Administration($_SESSION["typeConnexionBack"]));
 
 switch ($action) {
     case "Modifer":
@@ -51,7 +51,7 @@ switch ($action) {
         $mail->SMTPAutoTLS = false; //Pas de certificat TLS
         $mail->setFrom('contact@labruleriecomtoise.fr', 'contact');
         $mail->addAddress($entreprise["mailContact"], $entreprise["denomination"]);
-        if ($mail->addReplyTo('test@labruleriecomtoise.fr', 'admin')) {
+        if ($mail->addReplyTo('test.txt@labruleriecomtoise.fr', 'admin')) {
             $mail->Subject = 'Objet : MDP !';
             $mail->isHTML(false);
             $mail->Body = "MDP $motDePasse";
