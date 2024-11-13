@@ -12,7 +12,7 @@ use App\Vue\Vue_Utilisateur_Liste;
 $Vue->setEntete(new Vue_Structure_Entete());
 
 
-$Vue->setMenu(new Vue_Menu_Administration($typeConnexion));
+$Vue->setMenu(new Vue_Menu_Administration($_SESSION["typeConnexionBack"]));
 
 switch ($action) {
     // Niveau d'autorisation 1 : SuperAdmin : peut tout faire.
@@ -29,7 +29,7 @@ switch ($action) {
     case "mettreAJourUtilisateur":
 
         //Mettre à jour dans la liste des entreprises
-        Modele_Utilisateur::Utilisateur_Modifier($_REQUEST["idUtilisateur"], $_REQUEST["login"], $_REQUEST["codeCategorie"]);
+        Modele_Utilisateur::Utilisateur_Modifier($_REQUEST["idUtilisateur"], $_REQUEST["login"], $_REQUEST["niveauAutorisation"]);
         $Utilisateur = Modele_Utilisateur::Utilisateur_Select_ParId($_REQUEST["idUtilisateur"]);
 
         $listeUtilisateur = Modele_Utilisateur:: Utilisateur_Select_Cafe();

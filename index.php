@@ -98,7 +98,5 @@ switch ($typeConnexion) {
                 include "Controleur/Controleur_Catalogue_client.php";
                 break;
         }
-    default:
-        $Vue->addToCorps(new Vue_AfficherMessage("Type de connexion non reconnu"));
 }
 $Vue->afficher();

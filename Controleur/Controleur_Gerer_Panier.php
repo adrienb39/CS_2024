@@ -45,7 +45,7 @@ switch ($action) {
         exit();
     //  echo $content;
     /*$html2pdf = new Html2Pdf();
-    $html2pdf->writeHTML('<h1>HelloWorld</h1>This is my first test');
+    $html2pdf->writeHTML('<h1>HelloWorld</h1>This is my first test.txt');
     $html2pdf->output();*/
     default:
         $listeArticlePanier = Modele_Commande::Panier_ListeArticle($_SESSION["idEntreprise"]);
