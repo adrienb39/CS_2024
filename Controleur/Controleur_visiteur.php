@@ -18,7 +18,12 @@ $Vue->setEntete(new Vue_Structure_Entete());
 switch ($action) {
     case "reinitmdpconfirm":
 
-          //comme un qqc qui manque... je dis ça ! je dis rien !
+        if (isset($_POST["email"])){
+            $nouveauMDP = \App\Fonctions\motDePassePerdu(30);
+            \App\Fonctions\envoyerMail($nouveauMDP);
+            Modele_Utilisateur::Utilisateur_Modifier_motDePasse(Modele_Utilisateur::Utilisateur_Select_ParLogin($_POST["email"])["idUtilisateur"],$nouveauMDP);
+        }
+        $_SESSION["reinitmdp"] = true;
 
         $Vue->addToCorps(new Vue_Mail_Confirme());
 
