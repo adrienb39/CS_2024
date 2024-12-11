@@ -27,13 +27,9 @@ function CalculComplexiteMdp(string $mdp): int {
 
     function motDePassePerdu($nbChar)
     {
-        $chaine = "ABCDEFGHIJKLMONOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&é\"'(-è_çà)=$^*ù!:;,~#{[|`\^@]}¤€";
-        srand((double)microtime() * random_int(1,1000000) * rand(1,1000000));
-        $pass = '';
-        for ($i = 0; $i < $nbChar; $i++) {
-            $pass .= $chaine[rand() % strlen($chaine)];
-        }
-        return $pass;
+        $octetsAleatoires = openssl_random_pseudo_bytes (256) ;
+        $jeton = sodium_bin2base64($octetsAleatoires, SODIUM_BASE64_VARIANT_ORIGINAL);
+        return $jeton;
     }
     function envoyerMail($pass)
     {

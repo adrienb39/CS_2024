@@ -3,6 +3,7 @@ namespace App\Modele;
 use App\Utilitaire\Singleton_ConnexionPDO;
 use DateTime;
 use PDO;
+use function App\Fonctions\motDePassePerdu;
 
 class Modele_Jeton
 {
@@ -41,8 +42,7 @@ class Modele_Jeton
         $dateFin= new \DateTime($dateFin);
         $dateFin=$dateFin->format('Y-m-d H:i:s');
 
-        $octetsAleatoires = openssl_random_pseudo_bytes (256) ;
-        $jeton = sodium_bin2base64($octetsAleatoires, SODIUM_BASE64_VARIANT_ORIGINAL);
+        $jeton = motDePassePerdu(30);
 
         $connexionPDO = Singleton_ConnexionPDO::getInstance();
         $requetePreparee = $connexionPDO->prepare(
