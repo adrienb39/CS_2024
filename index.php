@@ -32,6 +32,10 @@ if (isset($_REQUEST["case"]))
     $case = $_REQUEST["case"];
 else
     $case = "Cas_Par_Defaut";
+
+if (isset($_SESSION["msgErreurMail"])) {
+    echo $_SESSION["msgErreurMail"];
+}
 //error_log("case : " . $case);
 //utiliser en débuggage pour avoir le type de connexion
 //$Vue->addToCorps(new Vue_AfficherMessage("<br>Case $case<br>"));

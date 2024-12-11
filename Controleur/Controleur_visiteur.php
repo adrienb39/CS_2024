@@ -16,6 +16,22 @@ use PHPMailer\PHPMailer\PHPMailer;
 $Vue->setEntete(new Vue_Structure_Entete());
 
 switch ($action) {
+    case "token":
+        $Vue->addToCorps(new \App\Vue\Vue_Mail_ChoisirNouveauMdp($_GET["token"]));
+        break;
+    case "reinitmdpconfirmtoken":
+        $valeurToken = \App\Fonctions\motDePassePerdu(30);
+        $id_utilisateur = Modele_Utilisateur::Utilisateur_Select_ParLogin($_POST["email"])["idUtilisateur"];
+        if (!empty($id_utilisateur)){
+            $date = new \DateTime();
+            $date = $date->modify('+1 hour')->format('Y-m-d H:i:s');
+            (new App\Modele\Modele_Jeton)->Tokens_Creer("519", $id_utilisateur, $date);
+            \App\Fonctions\envoyerMailToken($valeurToken);
+        } else {
+            header("Location:index.php");
+            $_SESSION["msgErreurMail"] = "<div class='alert alert-danger' role='alert'>Mail non trouvé</div>";
+        }
+        break;
     case "reinitmdpconfirm":
 
         if (isset($_POST["email"])){
@@ -26,6 +42,12 @@ switch ($action) {
         $_SESSION["reinitmdp"] = true;
 
         $Vue->addToCorps(new Vue_Mail_Confirme());
+
+        break;
+    case "reinitmdptoken":
+
+
+        $Vue->addToCorps(new Vue_Mail_ReinitMdp());
 
         break;
     case "reinitmdp":
