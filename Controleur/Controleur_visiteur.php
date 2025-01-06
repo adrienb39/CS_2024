@@ -26,6 +26,8 @@ switch ($action) {
         }
         break;
     case "token":
+        $verifToken = new \App\Modele\Modele_Jeton();
+        $verifToken->Tokens_Select_By_id($_SESSION["token"]);
         $_SESSION["token"] = $_GET["token"];
         $Vue->addToCorps(new \App\Vue\Vue_Mail_ChoisirNouveauMdp($_SESSION["token"]));
 
